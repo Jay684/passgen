@@ -1,0 +1,8 @@
+import random
+
+char = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+random_word = ""
+
+for i in range(10):
+    random_word += random.choice(char)
+print(random_word)
