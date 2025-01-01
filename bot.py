@@ -31,4 +31,8 @@ async def heh(ctx, count_heh=5):
 async def gen(ctx, count_heh=5):
     await ctx.send(gen_pass(count_heh))
 
+@bot.command()
+async def spam_emoji(ctx, emoji='😀'):
+    await ctx.send(emoji * 15)
+
 bot.run("YOUR_TOKEN")
