@@ -1,4 +1,7 @@
 import discord
+import os
+import random
+import requests
 from discord.ext import commands
 from main import gen_pass
 
@@ -34,5 +37,40 @@ async def gen(ctx, count_heh=5):
 @bot.command()
 async def spam_emoji(ctx, emoji='😀'):
     await ctx.send(emoji * 15)
+
+@bot.command()
+async def mem(ctx):
+    image_file = random.choice(os.listdir('image'))
+
+    with open(f'image/{image_file}', 'rb') as f:
+        # Mari simpan file perpustakaan/library Discord yang dikonversi dalam variabel ini!
+        picture = discord.File(f)
+   # Kita kemudian dapat mengirim file ini sebagai tolok ukur!
+    await ctx.send(file=picture)
+
+
+def get_woof_image_url():    
+    url = 'https://random.dog/woof.json'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+@bot.command('woof')
+async def woof(ctx):
+    '''Setelah kita memanggil perintah woof, program akan memanggil fungsi get_woof_image_url'''
+    image_url = get_woof_image_url()
+    await ctx.send(image_url)
+
+def get_random_image_url():    
+    url = 'https://meme-api.com/gimme'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+
+@bot.command('RandomMeme')
+async def RandomMeme(ctx):
+    '''Setelah kita memanggil perintah random_meme, program akan memanggil fungsi get_random_meme_image_url'''
+    image_url = get_random_image_url()
+    await ctx.send(image_url)
 
 bot.run("YOUR_TOKEN")
