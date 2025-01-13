@@ -15,6 +15,11 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
+bins = {
+    "recyclable": ["plastic bottle", "aluminum can", "glass jar"],
+    "organic": ["apple core", "banana peel", "vegetable scraps"]
+}
+
 @bot.event
 async def on_member_join(member):
     guild = member.guild
@@ -72,5 +77,25 @@ async def RandomMeme(ctx):
     '''Setelah kita memanggil perintah random_meme, program akan memanggil fungsi get_random_meme_image_url'''
     image_url = get_random_image_url()
     await ctx.send(image_url)
+
+@bot.command()
+async def throw_trash(ctx, trash: str, bin_name: str):
+    """Buang sampah ke tempat sampah yang benar. Contohnya: $throw_trash <trash> <bin_name>"""
+    
+    print(f"Received trash: '{trash}', bin_name: '{bin_name}'")
+
+    if bin_name not in bins:
+        await ctx.send("Salah bin! Pilih 'recyclable' atau 'organic'.")
+        return
+
+    if trash in bins[bin_name]:
+        await ctx.send(f"Benar! Kamu membuang {trash} ke {bin_name} bin.")
+    else:
+        correct_bins = [name for name, items in bins.items() if trash in items]
+        if correct_bins:
+            await ctx.send(f"Sampah ini seharusnya dibuang di {correct_bins[0]} bin.")
+        else:
+            await ctx.send("Sampah ini tidak milik ke bin apapun!")
+
 
 bot.run("YOUR_TOKEN")
