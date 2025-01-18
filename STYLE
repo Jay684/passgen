@@ -1,0 +1,15 @@
+body {
+    font-family: Inter, Georgia; /* keluarga font */
+    font-size: 15px; /* Ukuran font utama pada tag <p></p> */
+    background-color: #5988FF; /* Warna latar belakang laman web */
+    color: #FFFFFF; /* Warna teks */ 
+}
+h1 {
+    color: #FD98FB; /* Warna tajuk (header)*/
+    font-size: 29px; /* Ukuran font tajuk (header) */
+    font-family: Inter, serif; /* Keluarga font yang digunakan di tajuk (header) */
+}
+
+li {
+    margin-top: 10px;
+}
